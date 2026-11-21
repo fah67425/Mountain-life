@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>mountain life</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header class="topbar">
+            <div class="logo">
+                <h2>PEAK<span></span></h2>
+                <small>MOUNTAIN LIFE</small>
+            </div>
+
+            <div class="topinfo">
+                <div>
+                    <small>DAY</small>
+                    <strong id="day">1</strong>
+                </div>
+                <div>
+                    <small>TIME</small>
+                    <strong id="clock">08:00 AM</strong>
+                </div>
+                <div>
+                    <small>WALLET</small>
+                    <strong id="money">$100</strong>
+                </div>
+            </div>
+        </header>
+
+        <main class="container">
+            <section class="welcome">
+                <div>
+                    <p>your new beginning!</p>
+                    <h1>welcome to the highlands.</h1>
+                    <p>life moves differently up here</p>
+                </div>
+                <div class="weather">
+                    <span>weather :</span>
+                    <strong id="weather">-clear skies-</strong>
+                </div>
+            </section>
+
+            <section class="mountain">
+                <div class="mountainlabel">
+                    <p>current location</p>
+                    <h2>mountain valley</h2>
+                    <span>a quiet town surrounded by mountains.</span>
+                </div>
+                <div class="sun"></div>
+                <div class="peak peakback"></div>
+                <div class="peak peakfront"></div>
+                <div class="ground"></div>
+            </section>
+
+            <section class="profile-section">
+                <div class="sectionheading">
+                    <div>
+                        <p class="eyebrow">YOUR CHARACTER</p>
+                        <h2>personal profile</h2>
+                    </div>
+                    <span class="level" id="level">LEVEL 1</span>
+                </div>
+
+                <div class="profilecard">
+                    <div class="avatar">:)</div>
+                    <div class="profileinfo">
+                        <h3>explorer</h3>
+                        <p>mountain valley resident</p>
+                        <div class="xptrack">
+                            <div id="xpbar"></div>
+                        </div>
+                        <small id="xptext">0 / 100 XP</small>
+                    </div>
+                </div>
+            </section>
+
+            <section class="needssection">
+                <div class="sectionheading">
+                    <div>
+                        <p class="eyebrow">CHARACTER CONDITION</p>
+                        <h2>your needs</h2>
+                    </div>
+                </div>
+
+                <div class="needsgrid">
+                    <div class="needcard">
+                        <span>health</span>
+                        <strong id="healthvalue">100%</strong>
+                        <div class="bar"><div id="healthbar" class="fill health"></div></div>
+                    </div>
+
+                    <div class="needcard">
+                        <span>hunger</span>
+                        <strong id="hungervalue">100%</strong>
+                        <div class="bar"><div id="hungerbar" class="fill hunger"></div></div>
+                    </div>
+
+                    <div class="needcard">
+                        <span>happiness</span>
+                        <strong id="happinessvalue">100%</strong>
+                        <div class="bar"><div id="happinessbar" class="fill happiness"></div></div>
+                    </div>
+
+                    <div class="needcard">
+                        <span>energy</span>
+                        <strong id="energyvalue">100%</strong>
+                        <div class="bar"><div id="energybar" class="fill energy"></div></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="activitiessection">
+                <div class="sectionheading">
+                    <div>
+                        <p class="eyebrow">MAKE YOUR DAY</p>
+                        <h2>daily activities</h2>
+                    </div>
+                </div>
+
+                <div class="activitygrid">
+                    <button class="activitycard" onclick="doactivity('work')">
+                        <span class="activityicon">1</span>
+                        <h3>work</h3>
+                        <p>earn money for your next adventure</p>
+                        <small>+ $30 | 3 hours</small>
+                    </button>
+
+                    <button class="activitycard" onclick="doactivity('eat')">
+                        <span class="activityicon">2</span>
+                        <h3>eat</h3>
+                        <p>restore your hunger by eating :) </p>
+                        <small>-$10 | 1 hour</small>
+                    </button>
+
+                    <button class="activitycard" onclick="doactivity('explore')">
+                        <span class="activityicon">3</span>
+                        <h3>explore</h3>
+                        <p>explore the beautiful mountain vally</p>
+                        <small>+ 25xp | 2 hour</small>
+                    </button>
+
+                    <button class="activitycard" onclick="doactivity('rest')">
+                        <span class="activityicon">4</span>
+                        <h3>rest</h3>
+                        <p>take a break and restore energy</p>
+                        <small>+35 energy | 2 hour</small>
+                    </button>
+                </div>
+            </section>
+
+            <section class="journalsection">
+                <div class="sectionheading">
+                    <div>
+                        <p class="record">track your activity</p>
+                        <h2>activity journal</h2>
+                    </div>
+
+                    <span class="level" id="activitycount">0 activities</span>
+                </div>
+
+                <div class="eventdashboard">
+                    <div class="eventsummary">
+                        <div>
+                            <small>YOUR DAILY JOURNEY</small>
+                            <h3 id="eventsummarytext">a fresh day is waiting....</h3>
+                        </div>
+
+                        <div class="eventicon">PEAK MOUNTAIN LIFE</div>
+                    </div>
+
+                    <div class="eventfilters">
+                        <button class="filterbtn active" onclick="filterevents('all', this)">ALL</button>
+                        <button class="filterbtn" onclick="filterevents('work', this)">WORK</button>
+                        <button class="filterbtn" onclick="filterevents('eat', this)">EAT</button>
+                        <button class="filterbtn" onclick="filterevents('rest', this)">REST</button>
+                        <button class="filterbtn" onclick="filterevents('explore', this)">EXPLORE</button>
+                        <button class="filterbtn" onclick="filterevents('system', this)">SYSTEM</button>
+                    </div>
+
+                    <div class="eventheading">
+                        <h3>recent events</h3>
+                        <button class="clearbtn" onclick="clearevents()">clear history</button>
+                    </div>
+
+                    <div id="journal" class="eventlist">
+                        <div class="emptyevents">
+                            <h3>your story starts here</h3>
+                            <p>complete an activity to crealte you first event</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>mountain life</p>
+            <small>every day is a new adventure</small>
+        </footer>
+
+        <script src="main.js"></script>
+    </body>
+</html>
