@@ -8,7 +8,7 @@ In Mountain Life, you control an explorer living in a peaceful mountain valley. 
 
 ## Play the Game
 
-**Live Website:** https://fah67425.github.io/Mountain-life/
+**Live Website:** [https://fah67425.github.io/Mountain-life/](https://fah67425.github.io/Mountain-life/)
 
 **Recommended:** Desktop or laptop for the best experience.
 
@@ -91,6 +91,36 @@ Features include:
 - Daily activity counter.
 - Clear history button.
 
+### 10. Mountain Supply Shop
+Purchase useful supplies using your in-game money.
+
+Available items:
+
+| Item | Price | Effect |
+|---|---:|---|
+| Sandwich | $15 | Restores 30 hunger |
+| Energy Drink | $20 | Restores 35 energy |
+| First Aid Kit | $25 | Restores 30 health |
+| Water Bottle | $8 | Restores 15 hunger |
+
+Shop features:
+- Four purchasable supplies.
+- Wallet balance updates after purchases.
+- Prevents purchases when you lack money.
+- Purchase notifications.
+- Purchase history recorded in the Activity Journal.
+
+### 11. Usable Inventory
+Manage and use your purchased supplies.
+
+Features include:
+- Inventory item counters.
+- Use buttons for each item.
+- Items restore the corresponding character statistics.
+- Inventory decreases after using an item.
+- Prevents using items you do not own.
+- Prevents wasting items when the relevant statistic is already full.
+
 ## How to Play
 
 1. Open the game using the website link.
@@ -104,6 +134,8 @@ Features include:
 9. Watch your character level up and collect rewards.
 10. Check the weather before exploring.
 11. Use the Activity Journal to review your progress.
+12. Visit the Mountain Supply Shop to purchase supplies.
+13. Check your inventory and use items when your character needs them.
 
 ## Tips for Players
 
@@ -113,6 +145,8 @@ Features include:
 - Explore to gain XP and unlock higher levels.
 - Pay attention to weather conditions before exploring.
 - Save your money by planning your activities.
+- Purchase supplies before your character runs low on important statistics.
+- Keep useful items in your inventory for emergencies.
 
 ## Technologies Used
 
@@ -147,4 +181,4 @@ Desktop and laptop browsers are recommended for the best experience. The interfa
 
 *Every day is a new adventure.*
 
-**PEAK: Mountain Life**
+**Mountain Life**
