@@ -199,6 +199,8 @@ header {
     border-radius: 8px;
     font-size: 15px;
     font-weight: bold;
+    position: relative;
+    left: 472px;
 }
 
 .profilecard {
@@ -656,4 +658,84 @@ footer small {
     .filter-btn {
         padding: 8px 11px;
     }
+}
+
+.levelpopup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    width: min(340px, 90%);
+    padding: 30px;
+    background: black;
+    color: white;
+    border-radius: 15px;
+    text-align: center;
+    z-index: 10;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s ease;
+    box-shadow: 0 15px 60px #0007;
+}
+
+.levelpopup.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.levelpopup p {
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: white;
+}
+
+.levelpopup h2 {
+    font-size: 15px;
+}
+
+.levelpopup span {
+    display: block;
+    color: white;
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 22px;
+}
+
+.levelpopup button {
+    background: darkblue;
+    color: lightpink;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.levelpopup button:hover {
+    background: darkslateblue;
+}
+
+#leveltitle {
+    display: block;
+    color: blueviolet;
+    font-size: 14px;
+    margin-top: 5px;
+    position: relative;
+    top: 65px;
+    left: -2px;
+    background: lightgreen;
+    border-radius: 14px;
+    border: 1px solid black;
+    padding: 10px 10px;
+}
+
+.weather small {
+    color: #11958d;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.weather {
+    min-width: 140px;
 }
