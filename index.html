@@ -152,6 +152,51 @@
                 </div>
             </section>
 
+            <section class="shopsection">
+                <h2>mountain supply shop</h2>
+                <p>purchase supplies for your mountain journey</p>
+
+                <div class="shopwallet">your balance: $<span id="shopmoney">100</span></div>
+
+                <div class="shopitems">
+                    <div class="shopitem">
+                        <h3>bread</h3>
+                        <p>restore 40 hunger</p>
+                        <strong>$15</strong>
+                        <button onclick="buyitem('bread')">BUY</button>
+                    </div>
+
+                    <div class="shopitem">
+                        <h3>energy drink</h3>
+                        <p>restores 35 energy</p>
+                        <strong>$20</strong>
+                        <button onclick="buyitem('energy')">BUY</button>
+                    </div>
+
+                    <div class="shopitem">
+                        <h3>first aid kit</h3>
+                        <p>restores 30 health</p>
+                        <strong>$25</strong>
+                        <button onclick="buyitem('firstaid')">BUY</button>
+                    </div>
+
+                    <div class="shopitem">
+                        <h3>water bottle</h3>
+                        <p>restores 15 hunger</p>
+                        <strong>$5</strong>
+                        <button onclick="buyitem('water')">BUY</button>
+                    </div>
+                </div>
+
+                <p id="shopmessage">welcome to the supply shop!</p>
+
+                <h3>your inventory</h3>
+
+                <div id="inventory">
+                    <p>no items purchased yet</p>
+                </div>
+            </section>
+
             <section class="journalsection">
                 <div class="sectionheading">
                     <div>

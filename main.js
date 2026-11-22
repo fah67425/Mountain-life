@@ -9,6 +9,10 @@ let player = {
 let events = [];
 let currentfilter = "all";
 let currentweather = {};
+let inventory = {
+    bread: 0, energy: 0,
+    firstaid: 0, water: 0
+}
 const weathertypes = [
     {
         name: "sunny", description: "perfect weather for exploring", effect: "exploration gives extra happiness"
@@ -52,6 +56,7 @@ function updatestats() {
     document.getElementById("level").textContent = "LEVEL " + player.level;
     document.getElementById("xpbar").style.width = player.xp + "%";
     document.getElementById("xptext").textContent = player.xp + " / 100 XP";
+    document.getElementById("shopmoney").textContent = player.money;
 }
 
 function addxp(amount) {
@@ -346,6 +351,114 @@ function setweather(notify = true) {
             "the weather changed to " + currentweather.name, "system", currentweather.description + " " + currentweather.effect
         );
     }
+}
+
+function buyitem(item) {
+    const items = {
+        bread: {name: "bread", price: 15, effect: "hunger", amount: 40},
+        energy: {name: "energy drink", price: 10, effect: "energy", amount: 35,},
+        firstaid: {name: "first aid kit", price: 25,effect: "health", amount: 30},
+        water: {name: "water bottle", price: 5,effect: "hunger", amount: 15}
+    };
+    const selected = items[item];
+
+    if (!selected) return;
+    if (player.money < selected.price) {
+        document.getElementById("shopmessage").textContent = "not enough money!";
+        return;
+    }
+
+    player.money -= selected.price;
+    inventory[item]++;
+
+    document.getElementById("shopmessage").textContent = "you purchased " + selected.name + "!";
+
+    updateinventory();
+    updatestats();
+    addjournal("purchased " + selected.name + "!", "system","you spent $" + selected.price + " at the mountain supply shop");
+}
+
+function updateinventory() {
+    const inventoryelement = document.getElementById("inventory");
+    inventoryelement.innerHTML = "";
+
+    const names = {
+        bread: "bread",
+        energy: "energy drink",
+        firstaid: "first aid kit",
+        water: "water bottle"
+    };
+
+    for (let item in inventory) {
+        const container = document.createElement("div");
+        container.className = "inventoryitem";
+
+        const name = document.createElement("span");
+        name.textContent = names[item] + ": " + inventory[item];
+
+        const button = document.createElement("button");
+        button.textContent = "USE";
+        button.disabled = inventory[item] <= 0;
+        button.onclick = function() {
+            useitem(item);
+        };
+
+        container.appendChild(name);
+        container.appendChild(button);
+        inventoryelement.appendChild(container);
+    }
+}
+
+function useitem(item) {
+    if (inventory[item] <= 0) {
+        return;
+    }
+
+    let message = "";
+
+    if (item === "bread") {
+        if (player.hunger >= 100) {
+            message = "you are already full!";
+        } else {
+            player.hunger = Math.min(100, player.hunger + 30);
+            message = "you ate a bread. hunger restored!";
+        }
+    }
+    else if (item === "energy") {
+        if (player.energy >= player.maxenergy) {
+            message = "your energy is already full!";
+        } else {
+            player.energy = Math.min(player.maxenergy, player.energy + 35);
+        }
+        message = "you drank an energy drink. energy restored!";
+    }
+    else if (item === "firstaid") {
+        if (player.health >= 100) {
+            message = "your health is already full!";
+        } else {
+            player.health = Math.min(100,player.health + 30);
+            message = "you used a first aid kit. health restrored!";
+        }
+    }
+    else if (item === "water") {
+        if (player.hunger >= 100) {
+            message = "you dont need water right now!";
+        } else {
+            player.hunger = Math.min(100, player.hunger + 15);
+            message = "you drank water. hunger restored!";
+        }
+    }
+
+    if (message.includes("already") || message.includes("dont need")) {
+        document.getElementById("shopmessage").textContent = message;
+        return;
+    }
+
+    inventory[item]--;
+    document.getElementById("shopmessage").textContent = message;
+    updateinventory();
+    updatestats();
+    addjournal(message, "system", "you used one item from your inventory");
 }
 
 addjournal(
