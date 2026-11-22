@@ -534,3 +534,126 @@ footer small {
     overflow-y: auto;
     padding-right: 8px;
 }
+
+.eventcard {
+    display: flex;
+    gap: 13px;
+    padding: 14px;
+    background: #fafbf9;
+    border: 1px solid black;
+    border-radius: 15px;
+    animation: eventappear 0.3s ease;
+}
+
+@keyframes eventappear {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    } to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.eventmarker {
+    width: 5px;
+    flex-shrink: 0;
+    border-radius: 15px;
+    background: #789b79;
+}
+
+.eventcard[datacategory="work"] .eventmarker {
+    background: #789b79;
+}
+.eventcard[datacategory="eat"] .eventmarker {
+    background: #83a9c6;
+}
+.eventcard[datacategory="explore"] .eventmarker {
+    background: #7ba77c;
+}
+.eventcard[datacategory="rest"] .eventmarker {
+    background: #a18ac2;
+}
+.eventcard[datacategory="system"] .eventmarker {
+    background: #9ba49c;
+}
+
+.eventcontent {
+    flex: 1;
+    min-width: 0;
+}
+
+.eventtop {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 7px;
+}
+
+.eventcategory {
+    font-size: 9px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #69816d;
+}
+
+.eventtime {
+    color: #a0aaa2;
+    font-size: 10px;
+}
+
+.eventmessage {
+    font-size: 13px;
+    color: #34473a;
+    line-height: 1.5;
+}
+
+.eventdetails {
+    margin-top: 9px;
+    border-top: 1px solid #e9eee8;
+    padding-top: 9px;
+    color: #819087;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.eventexpand {
+    margin-top: 9px;
+    border: none;
+    background: transparent 50%;
+    color: #729174;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.emptyevents {
+    text-align: center;
+    padding: 35px 15px;
+    border-radius: 12px;
+}
+
+.emptyevents h3 {
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.emptyevents p {
+    color: #92d494;
+    font-size: 12px;
+}
+
+@media (max-width: 500px) {
+    .eventdashboard {
+        padding: 13px;
+    }
+    .eventsummary {
+        padding: 15px;
+    }
+    .eventfilters {
+        gap: 6px;
+    }
+    .filter-btn {
+        padding: 8px 11px;
+    }
+}

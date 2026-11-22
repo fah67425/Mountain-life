@@ -6,6 +6,9 @@ let player = {
     level: 1, xp: 0
 };
 
+let events = [];
+let currentfilter = "all";
+
 function updateclock() {
     let hour = player.hour;
     let period = hour >= 12  ? "PM" : "AM";
@@ -119,19 +122,151 @@ function doactivity(activity) {
         addjournal("a new day has begun.");
     }
 
-    addjournal(message);
+    addjournal(message, activity, "your character has completed " + activity + "ing. check your wallet and stats!");
     updateclock();
     updatestats();
 }
 
-function addjournal(message) {
-    let journal = document.getElementById("journal");
-    let entry = document.createElement("p");
-    entry.className = "journalentry";
-    entry.textContent = message;
+function addjournal(message, category = "system", details = "") {
+    let event = {
+        message: message, category: category,
+        details: details || message, time: getgametime(),
+        day: player.day
+    };
 
-    journal.prepend(entry);
+    events.unshift(event);
+    renderevents();
+    updateeventsummary();
 }
 
+function getgametime() {
+    let hour = player.hour;
+    let period = hour >= 12 ? "PM" : "AM";
+    let displayhour = hour % 12;
+
+    if (displayhour === 0) {
+        displayhour = 12;
+    }
+
+    return String(displayhour).padStart(2, "0") + ":00 " + period;
+}
+
+function renderevents() {
+    let journal = document.getElementById("journal");
+    journal.innerHTML = "";
+    let filteredevents = events.filter(event => {
+        if (currentfilter === "all") {
+            return true;
+        }
+        return event.category === currentfilter;
+    });
+
+    if (filteredevents.length === 0) {
+        journal.innerHTML = `
+        <div class="emptyevents">
+            <h3>no events found<h3>
+            <p>try another category or complete an activity</p>
+        </div>
+        `;
+
+        return;
+    }
+
+    filteredevents.forEach(event => {
+        let card = document.createElement("div");
+        card.className = "eventcard";
+        card.dataset.category = event.category;
+
+        let marker = document.createElement("div");
+        marker.className = "eventmarker";
+
+        let content = document.createElement("div");
+        content.className = "eventcontent";
+
+        let top = document.createElement("div");
+        top.className = "eventtop";
+
+        let category = document.createElement("span");
+        category.className = "eventcategory";
+        category.textContent = event.category.toUpperCase();
+
+        let time = document.createElement("span");
+        time.className = "eventtime";
+        time.textContent = "DAY " + event.day + " . " + event.time;
+
+        let message = document.createElement("p");
+        message.className = "eventmessage";
+        message.textContent = event.message;
+
+        let expand = document.createElement("button");
+        expand.className = "eventexpand";
+        expand.textContent = "show details";
+
+        let details = document.createElement("p");
+        details.className = "event-details";
+        details.textContent = event.details;
+        details.hidden = true;
+
+        expand.onclick = function() {
+            details.hidden = !details.hidden;
+
+            expand.textContent = details.hidden ? "show details" : "hide details";
+        };
+
+        top.appendChild(category);
+        top.appendChild(time);
+        content.appendChild(top);
+        content.appendChild(message);
+        content.appendChild(expand);
+        content.appendChild(details);
+        card.appendChild(marker);
+        card.appendChild(content);
+        journal.appendChild(card);
+    });
+}
+
+function filterevents(filter, button) {
+    currentfilter = filter;
+    document.querySelectorAll(".filterbtn").forEach(btn => {
+        btn.classList.remove("active");
+    });
+
+    button.classList.add("active");
+    renderevents();
+}
+
+function clearevents() {
+    if (events.length === 0){
+        return;
+    }
+
+    let confirmclear = confirm("are you sure you want to clear your event history?");
+
+    if (confirmclear) {
+        events = [];
+        renderevents();
+    }
+}
+
+function updateeventsummary() {
+    let count = events.filter(event => event.day === player.day &&
+        event.category !== "system").length;
+
+    document.getElementById("eventcount").textContent = count + (count === 1 ? " ACTIVITY" : " ACTIVITIES");
+
+    let summary = document.getElementById("eventsummarytext");
+
+    if (count === 0) {
+        summary.textContent = "a fresh day is waiting....";
+    } else if (count < 3) {
+        summary.textContent = "seems like ur doing something today.";
+    } else {
+        summary.textContent = "you are having a really nice day!";
+    }
+}
+
+addjournal(
+    "you arrived at mountain valley.", "system", "a new chapter of your new mountain life has begun!"
+);
 updateclock();
 updatestats();
